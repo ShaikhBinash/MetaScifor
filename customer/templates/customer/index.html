@@ -1,0 +1,22 @@
+{% extends 'customer/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8 col-sm-12 offset-md-1 p-4 text-center">
+            <h1>Bliss CAFE</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <h2>Welcome to Bliss Café! ☕✨</h2><br><br>
+        <p>Bliss Café is a small online café dedicated to bringing you the perfect cup of happiness! From freshly
+            brewed coffee to delicious homemade treats, every item on our menu is made with love and care. Whether
+            you're starting your morning with a rich espresso or unwinding with a cozy dessert, we’re here to add a
+            little sweetness to your day.</p>
+        <p>We believe that great flavors and warm moments go hand in hand. With quality ingredients, delightful
+            recipes, and a passion for good food, Bliss Café is your go-to spot for comfort in every sip and bite.
+            Order online and experience the joy of Bliss! 💕🍰</p><br><br>
+        <a href="{% url 'order' %}" class="btn btn-outline-primary">Order Now!</a>
+    </div>
+</div>
+{% endblock content %}
