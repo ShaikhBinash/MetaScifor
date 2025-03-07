@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load widget_tweaks %}
+{% block content %}
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5 text-center">
+            <h2 class="display-5 fw-bold">Django Jobs. Get Hired Quickly!</h2>
+        </div>
+        <div class="card shadow p-4">
+            <div class="card-body">
+                <form class="row gy-3 gx-3 align-items-center" method="GET">
+                    <div class="col-md-3">
+                        <label for="jobTitle" class="form-label">Name</label>
+                        {% render_field filter.form.title class="form-control" id="jobTitle" placeholder="Job Keyword" %}
+                    </div>
+                    <div class="col-md-3">
+                        <label for="jobType" class="form-label">Choose Job Type</label>
+                        {% render_field filter.form.job_type class="form-select"  %}
+                    </div>
+                    <div class="col-md-3">
+                        <label for="industryType" class="form-label">Choose Industry Type</label>
+                        {% render_field filter.form.industry class="form-select"  %}
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for job in filter.qs %}
+    <div class="col">
+        <div class="card h-100 shadow">
+            <div class="card-body">
+                <h5 class="card-title">{{job.title}}</h5>
+                <p class="card-text">Industry: {{job.industry}} </p>
+                <p class="card-text">Type: {{job.job_type}} </p>
+                <p class="card-text">Location: {{job.location}} </p>
+                <p class="card-text">Salary: {{job.salary}} </p>
+            </div>
+            <div class="card-footer text-muted">
+                {{ job.timestamp|naturaltime }}
+            </div>
+        </div>
+    </div><br>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}
