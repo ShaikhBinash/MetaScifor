@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Navbar</title>
+    <style>
+        /* Navbar styles */
+        .custom-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #3f51b5; /* Indigo */
+            padding: 10px 20px;
+            color: white;
+        }
+
+        /* Navbar Brand */
+        .custom-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Navbar Toggler */
+        .custom-toggler {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Navbar Links */
+        .custom-collapse {
+            display: flex;
+            flex-grow: 1;
+            justify-content: flex-end;
+        }
+
+        .custom-nav {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .custom-nav li {
+            margin: 0 10px;
+        }
+
+        .custom-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 8px 12px;
+            transition: 0.3s;
+        }
+
+        .custom-nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .custom-toggler {
+                display: block;
+            }
+
+            .custom-collapse {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #3f51b5;
+                position: absolute;
+                top: 50px;
+                left: 0;
+            }
+
+            .custom-collapse.active {
+                display: flex;
+            }
+
+            .custom-nav {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            .custom-nav li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="custom-navbar">
+        <a class="custom-brand" href="{% url 'index' %}">Bliss</a>
+        <button class="custom-toggler" onclick="toggleNavbar()">☰</button>
+        <!-- <div class="custom-collapse" id="navbarNav">
+            <ul class="custom-nav">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div> -->
+    </nav>
+
+    <script>
+        function toggleNavbar() {
+            document.getElementById("navbarNav").classList.toggle("active");
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+Here are the prices of all **20 café menu items** in **Indian Rupees (₹)**:  
+
+1. Cappuccino – ₹180  
+2. Iced Latte – ₹200  
+3. Classic Pancakes – ₹260  
+4. Avocado Toast – ₹280  
+5. French Fries – ₹160  
+6. Chicken Caesar Salad – ₹340  
+7. Blueberry Cheesecake – ₹240  
+8. Chocolate Brownie – ₹220  
+9. Espresso – ₹120  
+10. Mocha – ₹220  
+11. Green Tea Latte – ₹200  
+12. Mango Smoothie – ₹240  
+13. Garlic Bread – ₹180  
+14. Stuffed Mushrooms – ₹260  
+15. Grilled Cheese Sandwich – ₹200  
+16. Margherita Pizza – ₹360  
+17. Veggie Burger – ₹300  
+18. Spaghetti Aglio e Olio – ₹320  
+19. Chocolate Lava Cake – ₹280  
+20. Tiramisu – ₹300  
+
+Let me know if you want any adjustments! 😊
