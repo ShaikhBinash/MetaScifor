@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mx-auto" style="width: 76rem;">
+        <div class="card-body">
+            <h5 class="card-title mb-3">
+                All Patients for Dr. {{ doctor.name }}
+                <!-- Add button to send email to the doctor -->
+                <form method="POST" action="{% url 'send_doctor_patient_list' doctor.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Send Patient List to Doctor</button>
+                </form>
+            </h5>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Payment Status</th> <!-- New column for payment status -->
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for patient in patients %}
+                    <tr>
+                        <td>{{ patient.first_name }}</td>
+                        <td>{{ patient.surname }}</td>
+                        <td>{{ patient.location }}</td>
+                        <td>{{ patient.email }}</td>
+                        <td>
+                            {% if patient.is_paid %}
+                                <span class="text-success">Paid</span>
+                            {% else %}
+                                <span class="text-danger">Pending</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form method="POST" action="{% url 'send_confirmation_email' patient.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success">Send Confirmation</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">No patients found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

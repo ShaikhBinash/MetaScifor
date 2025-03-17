@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container mt-3">  {# Reduced top margin from mt-5 to mt-3 #}
+    <div class="col-md-6 mx-auto">  {# Centered the form #}
+        <div class="border rounded p-3 shadow-sm bg-white"> {# Reduced padding from p-4 to p-3 #}
+            <h4 class="mb-3 text-center">Update Hospital Information</h4> {# Centered the heading #}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-2"> {# Reduced margin-bottom for compact spacing #}
+                    <label class="form-label">Hospital Name</label>
+                    {% render_field form.name class="form-control" %}
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Address</label>
+                    {% render_field form.address class="form-control" %}
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Phone Number</label>
+                    {% render_field form.phone_number class="form-control" %}
+                </div>
+
+                <div class="mb-2">
+                    <label class="form-label">Operating Hours</label>
+                    {% render_field form.start_end_time class="form-control" %}
+                </div>
+
+                <div class="text-center mt-3"> {# Centered the button #}
+                    <button type="submit" class="btn btn-primary px-4">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

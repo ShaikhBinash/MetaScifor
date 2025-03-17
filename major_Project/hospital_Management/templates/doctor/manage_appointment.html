@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card mx-auto" style="width: 76rem;">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Doctor Appointment Management</h5>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Specialities</th>
+                        <th scope="col">Timing</th>
+                        <th scope="col">No. of Patients</th>
+                        <th scope="col">update Doctor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doctor in doctors %}
+                    <tr>
+                        <td>{{ doctor.name }}</td>
+                        <td>{{ doctor.specialities }}</td>
+                        <td>{{ doctor.timing }}</td>
+                        <td>
+                            {{ doctor.num_patients }} 
+                            <a href="{% url 'all-patients' doctor.pk %}">View all</a>
+                        </td>
+                        <td>
+                            <a href="{% url 'update-doctor' doctor.pk %}">Update Now</a>
+                        </td>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

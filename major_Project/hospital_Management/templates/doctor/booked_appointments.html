@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card mx-auto" style="width: 76rem;">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Booked Appointments</h5>
+
+            <p>Total Doctors Booked: <strong>{{ appointments|length }}</strong></p>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Doctor Name</th>
+                        <th scope="col">Speciality</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Hospital</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{ appointment.doctor.name }}</td>
+                        <td>{{ appointment.doctor.specialities }}</td>
+                        <td>{{ appointment.doctor.timing }}</td>
+                        <td>{{ appointment.doctor.hospital.name }}</td>  
+                        <td>
+                            <a href="{% url 'doctor-details' appointment.doctor.pk %}"><small>View Doctor</small></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">No appointments booked yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

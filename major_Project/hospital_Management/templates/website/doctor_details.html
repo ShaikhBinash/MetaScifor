@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h2 class="display-5 fw-bold">{{ doctor.name }}</h2>
+            <p class="col-md-8 fs-5 mt-3">{{ doctor.speciality }}</p>
+
+            <!-- Book Appointment Button (Redirects to Payment Page) -->
+            <a class="btn btn-primary" href="{% url 'book-appointment' doctor.pk %}">Book Appointment</a>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <section>
+        <h5>Appointment Fees</h5>
+        <p>₹{{ doctor.appointment_fees|floatformat:2 }}</p>
+    </section>
+
+    <section>
+        <h5>Timing</h5>
+        <p>{{ doctor.timing }}</p>
+    </section>
+    
+    <section>
+        <h5>Hospital Details</h5>
+        <p><strong>Hospital Name:</strong> {{ doctor.hospital.name }}</p>
+        <p><strong>Location:</strong> {{ doctor.hospital.address }}</p>
+        <p><strong>Contact:</strong> {{ doctor.hospital.phone_number }}</p>
+    </section>
+
+    <section>
+        <h5>Doctor QR Code</h5>
+        {% if doctor.qr_code %}
+            <img src="{{ doctor.qr_code.url }}" alt="Doctor QR Code" class="img-fluid" width="200">
+        {% else %}
+            <p>No QR Code available.</p>
+        {% endif %}
+    </section>
+</div>
+
+{% endblock %}

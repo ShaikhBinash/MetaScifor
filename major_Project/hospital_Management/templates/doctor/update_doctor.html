@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mx-auto" style="width: 40rem;">
+            <div class="card-body">
+                <h5 class="card-title mb-3">Update a Doctor</h5>
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Doctor Name</label>
+                        {% render_field form.name class="form-control" %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">email</label>
+                        {% render_field form.email class="form-control" %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Speciality</label>
+                        {% render_field form.specialities class="form-control" %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Available Timing</label>
+                        {% render_field form.timing class="form-control" %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Appointment Fees</label>
+                        {% render_field form.appointment_fees class="form-control" %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Register Doctor</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

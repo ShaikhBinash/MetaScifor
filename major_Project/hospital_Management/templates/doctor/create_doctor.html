@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="container mt-3">  {# Reduced top margin from mt-5 to mt-3 #}
+    <div class="col-md-6 mx-auto">  {# Centered the form horizontally #}
+        <div class="card shadow-sm border rounded p-3 bg-white"> {# Reduced padding from p-4 to p-3 #}
+            <div class="card-body">
+                <h5 class="card-title text-center mb-3">Register a Doctor</h5> {# Centered heading #}
+
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="mb-2"> {# Reduced margin-bottom for compact spacing #}
+                        <label class="form-label">Doctor Name</label>
+                        {% render_field form.name class="form-control" %}
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Email</label>
+                        {% render_field form.email class="form-control" %}
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Speciality</label>
+                        {% render_field form.specialities class="form-control" %}
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Available Timing</label>
+                        {% render_field form.timing class="form-control" %}
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label">Appointment Fees</label>
+                        {% render_field form.appointment_fees class="form-control" %}
+                    </div>
+
+                    <div class="text-center mt-3"> {# Centered the button #}
+                        <button type="submit" class="btn btn-primary px-4">Register Doctor</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

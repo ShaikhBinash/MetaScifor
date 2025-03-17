@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container d-flex justify-content-center">
+    <div class="col-md-6">
+        <div class="card p-4 shadow-lg">
+            <h2 class="text-center">Appointment Payment</h2>
+            <p class="text-center">You are booking an appointment with <strong>Dr. {{ doctor.name }}</strong> for ₹{{ amount|floatformat:2 }}</p>
+
+            <form id="payment-form" method="POST" action="{% url 'payment-success' %}">
+                {% csrf_token %}
+                <input type="hidden" name="appointment_id" value="{{ appointment_id }}">
+                <input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
+                <input type="hidden" name="razorpay_order_id" id="razorpay_order_id">
+
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-success w-50" onclick="makePayment()">Pay Now</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Razorpay Script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    function makePayment() {
+        var options = {
+            "key": "{{ key }}",
+            "amount": "{{ amount }}",
+            "currency": "INR",
+            "name": "Hospital Management",
+            "description": "Doctor Appointment Payment",
+            "order_id": "{{ order_id }}",
+            "handler": function (response) {
+                document.getElementById("razorpay_payment_id").value = response.razorpay_payment_id;
+                document.getElementById("razorpay_order_id").value = response.razorpay_order_id;
+                document.getElementById("payment-form").submit();
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    }
+</script>
+
+{% endblock %}

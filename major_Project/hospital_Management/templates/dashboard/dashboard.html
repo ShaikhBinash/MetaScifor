@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if request.user.is_patient and not request.user.has_profile %}
+<div class="alert alert-danger" role="alert">
+    <b>You are seeing this because you have not created any Profile. Create one from
+        <a href="{% url 'update-patient' %}">here</a></b>
+</div>
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to</h1>
+            <p class="col-md-8 fs-4">Patient Dashboard</p>
+        </div>
+    </div>
+</section>
+
+{% else %}
+
+
+{% if request.user.is_admin and not request.user.has_hospital %}
+<div class="alert alert-danger" role="alert">
+    <b>You are seeing this because you have not created any Hospital. Create one from
+        <a href="{% url 'update-hospital' %}">here</a></b>
+</div>
+
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to</h1>
+            <p class="col-md-8 fs-4">Hospital Dashboard</p>
+        </div>
+    </div>
+</section>
+
+{% else %}
+<section>
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Welcome to</h1>
+            <p class="col-md-8 fs-4">General Dashboard</p>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% endif %} {# Ensure this closes the block properly #}
+
+{% endblock content %}

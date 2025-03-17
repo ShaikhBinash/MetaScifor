@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMS</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Global Styles */
+        body {
+            background-color: #eef5f9; /* Light blue healthcare background */
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #007bff !important; /* Hospital blue */
+            padding: 15px;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 1.1rem;
+            color: white !important;
+        }
+
+        .navbar-nav .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            background-color: #0056b3;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: #004494;
+        }
+
+        /* Container Styling */
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Alerts */
+        .alert {
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+
+        /* Search Container */
+        .search-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Cards */
+        .job-card {
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .job-card:hover {
+            transform: scale(1.02);
+        }
+
+        .card-title {
+            color: #0056b3;
+            font-weight: bold;
+        }
+
+        .list-group-item {
+            font-size: 1.1rem;
+            border: none;
+        }
+    </style>
+
+</head>
+
+<body>
+
+   
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'dashboard' %}">Hospital Management</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            
+            {% if request.user.is_authenticated %}
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'about' %}">About us</a>
+                    </li>
+
+                    {% if request.user.is_patient %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'doctor-listing' %}">Doctor Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'booked-appointments' %}">Manage Appointments</a>
+                        </li>
+                    {% elif request.user.is_admin %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'create-doctor' %}">Add Doctor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'manage-appoinment' %}">Manage Appointment</a>
+                        </li>
+                    {% endif %}
+                </ul>
+
+                <!-- Move Email and Logout to Right -->
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-white px-3 rounded" style="background-color: #343a40;">
+                            {{ request.user.email }}
+                        </a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <a href="{% url 'logout' %}" class="btn btn-primary">Logout</a>
+                    </li>
+                </ul>
+
+            {% else %}
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" class="btn btn-primary">Log In</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">
+                    <b>{{ message }}</b>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+</body>
+
+</html>
